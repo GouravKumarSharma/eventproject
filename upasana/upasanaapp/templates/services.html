@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+    {% for s in service %}
+
+        <div class="col-sm-4 mb-5">
+
+
+
+{% csrf_token %}
+    <input type=hidden name="name" id="name"  value="{{ s.name }}" size=10>
+    <input type=hidden name="id" id="id" value="{{ s.f_id }}" size=10>
+    <div class="d-inline-block service details fg" style="background:white;;border:1px black;padding:0px;margin:3px;box-shadow:5px 5px 8px grey;width:300px;position: relative;top:100px;">
+
+
+    <div class="card" style="width: 300px;height:400px;padding:15px;margin:0px;background-image:url('/media/{{ s.cover_image }}');background-size:cover; float:right;display:inline;">
+
+  <div class="card-body">
+
+    <h5 class="card-title" name="name" style="background: yellow;position:relative;left:-30px;">{{ s.name }}</h5>
+    <p class="card-text" style="position:relative;top:200px;color:white;">{{ s.discription }}</p>
+   <span class="divpr" id="divpr{{ s.f_id }}">
+    <
+    <button class="btn btn-primary" id="{{s.id}}" alt="video" data-toggle="modal" data-target="#modal1" style="position:relative;top:220px;left:70px;">More Details >></button></span>
+  </div>
+</div>
+</div>
+
+
+
+
+        </div>
+    {% endfor %}
+</div>
+    </div>
+    <!--Modal: Name-->
+    <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+
+        <!--Content-->
+        <div class="modal-content">
+          {% for s in service %}
+          <!--Body-->
+          <div class="modal-body mb-0 p-0">
+            <h1>{{s.name}}</h1>
+            <img src="/media/{{s.cover_image}}" style="width: 500px;">
+            <p>{{s.discription}}</p>
+            <p><span style="color:black">Mobile No. : </span> {{s.mobile_no}}</p>
+            <p><a href="https://www.gmail.com" class="pl-3 pr-3"><span class="icon-linkedin"></span>   </a> {{s.email}}</p>
+          </div>
+          {% endfor %}
+          <!--Footer-->
+          <div class="modal-footer justify-content-center">
+            <span class="mr-4">Share</span>
+            <div>
+              <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+              <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
+              <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+              <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
+            </div>
+
+            <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">Close</button>
+
+          </div>
+
+        </div>
+        <!--/.Content-->
+
+      </div>
+    </div>
+    <!--Modal: Name-->
+
+
+{% endblock %}
+
+{% block script %}
+<script>
+    b=document.getElementById('id').value
+    c = document.getElementById('name').value
+
+    var service = {
+        id : b,
+        name  :c
+    }
+    idstr_ser = JSON.stringify(service)
+    localStorage.setItem('service',idstr_ser);
+    console.log(service)
+    if(localStorage.getItem('service') != null){
+        service={};
+    }
+    else{
+        service=JSON.parse(localStorage(service));
+
+    }
+    $('.divpr').on('click','button.service',function(){
+        let idstr = this.id.toString();
+        if (service[idstr]!=undefined){
+            id=id;
+            name=name;
+        }
+        else{
+            id=1;
+            name=document.getElementById('name'+idstr).innerHTML;
+            service[idstr]=[id,name];
+
+        }
+    });
+
+
+</script>
+
+{% endblock %}

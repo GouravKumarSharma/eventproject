@@ -17,3 +17,12 @@ class VideoData(models.Model):
     ytlink = models.CharField(max_length=100,default="")
     def __str__(self):
         return self.name
+class farmhouse_detail(models.Model):
+    name = models.CharField(max_length=100)
+    discription = models.CharField(max_length=1000)
+    mobile_no = models.IntegerField(default="")
+    email = models.EmailField()
+    f_id=models.IntegerField(default="",primary_key="id")
+    cover_image = models.ImageField(upload_to="upasanaapp/images")
+    def __str__(self):
+        return self.name

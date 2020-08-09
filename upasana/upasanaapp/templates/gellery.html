@@ -40,7 +40,7 @@
 <form>
   <a><img class="img-fluid z-depth-1" src="/media/{{v.cover_image}}" alt="video" data-toggle="modal" data-target="#modal1" style="width: 100%;height: 230px;">
 <input type="hidden" name="filename" value="{{v.cover_image}}">
-      <img src="{% static 'images/play.png' %}" style="position: relative;top: -50%;" data-toggle="modal" data-target="#modal1" ></a>
+<img src="{% static 'images/play.png' %}" style="position: relative;left: 0px;top: -130px;" data-toggle="modal" data-target="#modal1" ></a>
 
 </form>
 
@@ -58,11 +58,10 @@
             <div class="modal-body mb-0 p-0">
 
               <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-                {% if v.cover_image == filename %}
                   <video width="320" height="240" controls>
                       <source src="/media/{{v.file}}" type="video/mp4">
                   </video>
-                  {% endif %}
+
               </div>
 
             </div>
